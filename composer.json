@@ -1,0 +1,38 @@
+{
+    "name": "yuloh/container",
+    "type": "library",
+    "description": "",
+    "keywords": [
+        "yuloh",
+        "container"
+    ],
+    "homepage": "https://github.com/yuloh/container",
+    "license": "MIT",
+    "authors": [
+    ],
+    "require": {
+        "php" : ">=5.4.0",
+        "container-interop/container-interop": "^1.1"
+    },
+    "provide": {
+        "container-interop/container-interop-implementation": "^1.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit" : "4.*",
+        "squizlabs/php_codesniffer": "~2.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Yuloh\\Container\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Yuloh\\Container\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "cs": "phpcs --standard=psr2 src/"
+    }
+}
