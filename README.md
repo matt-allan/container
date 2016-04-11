@@ -1,5 +1,9 @@
 # Container
 
+[![Latest Version on Packagist][ico-version]][link-packagist]
+[![Software License][ico-license]](LICENSE.md)
+[![Build Status][ico-travis]][link-travis]
+
 Container is a really simple, minimalist dependency injection container.  It's compatible with [container-interop](https://github.com/container-interop/container-interop), so you can use it with lots of different projects out of the box.
 
 The code is really easy to read; It's basically an array of identifier => callable mappings, and the callable is invoked to get the resulting object.
@@ -78,3 +82,10 @@ There are **a lot** of containers out there.  I was working on a project and wan
 $ composer test
 $ composer cs
 ```
+
+[ico-version]: https://img.shields.io/packagist/v/yuloh/container.svg?style=flat-square
+[ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/yuloh/container/master.svg?style=flat-square
+
+[link-packagist]: https://packagist.org/packages/:vendor/:package_name
+[link-travis]: https://travis-ci.org/:vendor/:package_name
