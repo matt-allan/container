@@ -57,6 +57,27 @@ class Container implements ContainerInterface, \ArrayAccess
     }
 
     /**
+     * Adds a shared (singleton) entry to the container.
+     *
+     * @param string   $id       Identifier of the entry.
+     * @param \Closure $value    The closure to invoke when this entry is resolved.
+     *                           The closure will be given this container as the only
+     *                           argument when invoked.
+     */
+    public function share($id, \Closure $value)
+    {
+        $this->definitions[$id] = function ($container) use ($value) {
+            static $object;
+
+            if (is_null($object)) {
+                $object = $value($container);
+            }
+
+            return $object;
+        };
+    }
+
+    /**
      * Removes an entry from the container.
      *
      * @param string $id Identifier of the entry to remove.
