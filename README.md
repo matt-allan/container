@@ -97,5 +97,5 @@ $ composer cs
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
 [ico-travis]: https://img.shields.io/travis/yuloh/container/master.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/:vendor/:package_name
-[link-travis]: https://travis-ci.org/:vendor/:package_name
+[link-packagist]: https://packagist.org/packages/yuloh/container
+[link-travis]: https://travis-ci.org/yuloh/container
