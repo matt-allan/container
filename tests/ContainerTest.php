@@ -47,7 +47,7 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
 
     public function testNotFound()
     {
-        $this->setExpectedException(NotFoundException::class);
+        $this->setExpectedException('Yuloh\Container\NotFoundException');
         $container = new Container();
         $container->get('unknown');
     }
