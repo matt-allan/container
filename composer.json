@@ -1,7 +1,7 @@
 {
     "name": "yuloh/container",
     "type": "library",
-    "description": "",
+    "description": "A lightweight container-interop compatible DI container",
     "keywords": [
         "yuloh",
         "container"

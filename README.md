@@ -4,9 +4,9 @@
 [![Software License][ico-license]](LICENSE.md)
 [![Build Status][ico-travis]][link-travis]
 
-Container is a really simple, minimalist dependency injection container.  It's compatible with [container-interop](https://github.com/container-interop/container-interop), so you can use it with lots of different projects out of the box.
+Container is a lightweight dependency injection container.  It's compatible with [container-interop](https://github.com/container-interop/container-interop), so you can use it with lots of different projects out of the box.
 
-The code is really easy to read; It's basically an array of identifier => callable mappings, and the callable is invoked to get the resulting object.
+The container is really simple; It's basically an array of identifier => callable mappings, and the callable is invoked to get the resulting object.
 
 This package is compliant with PSR-1, PSR-2 and PSR-4.
 
