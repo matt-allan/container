@@ -47,6 +47,16 @@ $container->set('db', function ($container) {
 });
 ```
 
+#### Singleton Entries
+
+You can also bind shared entries in the container.  A shared entry will be resolved once and reused for subsequent calls.
+
+```php
+$container->share('events', function () {
+    return new League\Event\Emitter();
+});
+```
+
 ### Getting Entries
 
 To check if an entry exists, use `has`.  To get an entry, use `get`.  If you are just retrieving entries you can typehint `Interop\Container\ContainerInterface` instead of the actual Container.
