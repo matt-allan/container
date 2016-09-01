@@ -3,6 +3,8 @@
 namespace Yuloh\Container;
 
 use Interop\Container\ContainerInterface;
+use ReflectionClass;
+use ReflectionParameter;
 
 class Container implements ContainerInterface, \ArrayAccess
 {
@@ -23,11 +25,48 @@ class Container implements ContainerInterface, \ArrayAccess
      */
     public function get($id)
     {
-        if (!$this->has($id)) {
+        // If we have a binding for it, then it's a closure.
+        // We can just invoke it and return the resolved instance.
+        if ($this->has($id)) {
+            return $this->definitions[$id]($this);
+        }
+
+        // Otherwise we are going to try and use reflection to "autowire"
+        // the dependencies and instantiate this entry if it's a class.
+        if (!class_exists($id)) {
             throw NotFoundException::create($id);
         }
 
-        return $this->definitions[$id]($this);
+        $reflector = new ReflectionClass($id);
+
+        // If the reflector is not instantiable, it's probably an interface.
+        // In that case the user should register a factory, since we can't possibly know what
+        // concrete class they want.  It could also be an abstract class, which we can't build either.
+        if (!$reflector->isInstantiable()) {
+            throw NotFoundException::create($id);
+        }
+
+        /** @var \ReflectionMethod|null */
+        $constructor = $reflector->getConstructor();
+
+        // If there isn't a constructor, there aren't any dependencies.
+        // We can just instantiate the class and return it without doing anything.
+        if (is_null($constructor)) {
+            return new $id();
+        }
+
+        // Otherwise we need to go through and recursively build all of the dependencies.
+        $dependencies = $constructor->getParameters();
+        $dependencies = array_map(function (ReflectionParameter $dependency) use ($id) {
+
+            if (is_null($dependency->getClass())) {
+                throw NotFoundException::create($id);
+            }
+
+            return $this->get($dependency->getClass()->name);
+        }, $dependencies);
+
+        return $reflector->newInstanceArgs($dependencies);
     }
 
     /**

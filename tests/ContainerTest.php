@@ -92,4 +92,58 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $container = new Container();
         $container->get('unknown');
     }
+
+    public function testContainerCanAutowireRecursively()
+    {
+        $container = new Container();
+        $container->set(LoggerInterface::class, function () {
+            return new Logger();
+        });
+
+        $testController = $container->get(TestController::class);
+
+        $this->assertInstanceOf(UserRepository::class, $testController->userRepo);
+        $this->assertInstanceOf(DB::class, $testController->userRepo->db);
+        $this->assertInstanceOf(Logger::class, $testController->userRepo->db->logger);
+    }
+}
+
+class TestController
+{
+    public $userRepo;
+
+    public function __construct(UserRepository $userRepo)
+    {
+        $this->userRepo = $userRepo;
+    }
+}
+
+class UserRepository
+{
+    public $db;
+
+    public function __construct(DB $db)
+    {
+        $this->db = $db;
+    }
+}
+
+class DB
+{
+    public $logger;
+
+    public function __construct(LoggerInterface $logger)
+    {
+        $this->logger = $logger;
+    }
+}
+
+interface LoggerInterface
+{
+    public function log($msg);
+}
+
+class Logger implements LoggerInterface
+{
+    public function log($msg){}
 }
