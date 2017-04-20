@@ -8,6 +8,8 @@ Container is a lightweight dependency injection container.  It's compatible with
 
 The container is really simple; It's basically an array of identifier => callable mappings, and the callable is invoked to get the resulting object.
 
+New to dependency injection and containers? I wrote a [blog post](http://mattallan.org/2016/dependency-injection-containers/) explaining dependency injection and how this container works.
+
 This package is compliant with PSR-1, PSR-2 and PSR-4.
 
 ## Install
