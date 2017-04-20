@@ -2,7 +2,9 @@
 
 namespace Yuloh\Container;
 
-class NotFoundException extends \Exception implements \Interop\Container\Exception\NotFoundException
+use Psr\Container\NotFoundExceptionInterface;
+
+class NotFoundException extends \Exception implements NotFoundExceptionInterface
 {
     /**
      * Creates a new NotFoundException.

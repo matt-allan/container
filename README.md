@@ -4,7 +4,7 @@
 [![Software License][ico-license]](LICENSE.md)
 [![Build Status][ico-travis]][link-travis]
 
-Container is a lightweight dependency injection container.  It's compatible with [container-interop](https://github.com/container-interop/container-interop), so you can use it with lots of different projects out of the box.
+Container is a lightweight dependency injection container.  It's compatible with the [PSR-11 container interface](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-11-container.md), so you can use it with lots of different projects out of the box.
 
 The container is really simple; It's basically an array of identifier => callable mappings, and the callable is invoked to get the resulting object.
 
@@ -47,36 +47,17 @@ $container->set('db', function ($container) {
 });
 ```
 
-#### Singleton Entries
-
-You can also bind shared entries in the container.  A shared entry will be resolved once and reused for subsequent calls.
-
-```php
-$container->share('events', function () {
-    return new League\Event\Emitter();
-});
-```
+All entries are shared (singletons), which means an entry will be resolved once and reused for subsequent calls.
 
 ### Getting Entries
 
-To check if an entry exists, use `has`.  To get an entry, use `get`.  If you are just retrieving entries you can typehint `Interop\Container\ContainerInterface` instead of the actual Container.
+To check if an entry exists, use `has`.  To get an entry, use `get`.  If you are just retrieving entries you can typehint `Psr\Container\ContainerInterface` instead of the actual Container.
 
 ```php
 if ($container->has('db')) {
     $db = $container->get('db');
 }
 ```
-
-### Array Usage
-
-The container implements [ArrayAccess](http://php.net/manual/en/class.arrayaccess.php), so you can use the container as if it was an array.  It's a little less verbose.
-
-```php
-$container['templates'] = function () {
-    return new League\Plates\Engine('/resources/views');
-};
-```
-
 ## Why Another Container?
 
 There are **a lot** of containers out there.  I was working on a project and wanted a lightweight default container and couldn't find what I wanted.  This container:
