@@ -10,7 +10,7 @@ The container is really simple; It's basically an array of identifier => callabl
 
 New to dependency injection and containers? I wrote a [blog post](http://mattallan.org/2016/dependency-injection-containers/) explaining dependency injection and how this container works.
 
-This package is compliant with PSR-1, PSR-2 and PSR-4.
+This package is compliant with PSR-1, PSR-2, PSR-4, and PSR-11.
 
 ## Install
 
